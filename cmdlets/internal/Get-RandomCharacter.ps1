@@ -8,10 +8,5 @@ function Get-RandomCharacter
         [String]
         $CharactersToChooseFrom
     )
-
-    $offSet = Get-Random -Minimum 0 `
-                -Maximum (($CharactersToChooseFrom.Length) - 1) `
-                -SetSeed ((get-date).Ticks % [int32]::MaxValue)
-
-    return $CharactersToChooseFrom.SubString($offSet,1)
+    return $CharactersToChooseFrom[(Get-Random -Maximum (($CharactersToChooseFrom.Length) -1 ) )] 
 }

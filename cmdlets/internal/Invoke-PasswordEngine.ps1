@@ -76,36 +76,35 @@ function Invoke-PasswordEngine
     $passwordIsValid = $false
     $iterationCount = 0
     $password = [string]::Empty
-    while((-not $passwordIsValid) -and ($iterationCount -lt $maximumIterations))
+    while((! $passwordIsValid) -and (++$iterationCount -lt $maximumIterations))
     {
        $passwordIsValid = $true
  
-       $iterationCount++
-       for ($i = 1; $i -le $Length; $i++)
+       while ([string]::IsNullOrEmpty($password) -or ($password.Length -le $Length))
        {
-           $password += Get-RandomCharacter $passwordOptions
-       }
-       if ($passwordIsValid -and $includeLowerCaseLetters)
-       {
-           $passwordIsValid = Test-StringContainsCharacter $password $lowerCaseLetters
-       }
-       if ($passwordIsValid -and $includeUpperCaseLetters)
-       {
-           $passwordIsValid = Test-StringContainsCharacter $password $upperCaseLetters
-       }
-       if ($passwordIsValid -and $includeNumbers)
-       {
-           $passwordIsValid = Test-StringContainsCharacter $password $numbers
-       }
-       if ($passwordIsValid -and $includePunctuation)
-       {
-           $passwordIsValid = Test-StringContainsCharacter $password $punctuation
-       }
+            $password += Get-RandomCharacter $passwordOptions
+       
+            if ($passwordIsValid -and $includeLowerCaseLetters)
+            {
+                $passwordIsValid = Test-StringContainsCharacter $password $lowerCaseLetters
+            }
+            if ($passwordIsValid -and $includeUpperCaseLetters)
+            {
+                $passwordIsValid = Test-StringContainsCharacter $password $upperCaseLetters
+            }
+            if ($passwordIsValid -and $includeNumbers)
+            {
+                $passwordIsValid = Test-StringContainsCharacter $password $numbers
+            }
+            if ($passwordIsValid -and $includePunctuation)
+            {
+                $passwordIsValid = Test-StringContainsCharacter $password $punctuation
+            } 
+        }
     }   
 
-    if (-not $passwordIsValid)
+    if (!$passwordIsValid)
     {
-       $password = [string]::Empty
        if ($includeLowerCaseLetters)
        {
            $password += Get-RandomCharacter $lowerCaseLetters

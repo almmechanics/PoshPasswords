@@ -5,7 +5,6 @@ function Test-StringContainsCharacter
     [CmdletBinding()]
     Param
     (
-        [Parameter(Mandatory)]
         [String]
         $string,
         [Parameter(Mandatory)]
