@@ -7,7 +7,7 @@ function Get-RandomCharacter
     
     .DESCRIPTION
     Randomly choose a character from an input collection
-        
+
     .PARAMETER InputString
     Characters to be used for testing
     
@@ -20,6 +20,7 @@ function Get-RandomCharacter
     (
         [Parameter(Mandatory)]
         [String]
+        [ValidateNotNullOrEmpty()]
         $InputString
     )
     return $InputString[(Get-Random -Maximum (($InputString.Length) -1 ) )] 

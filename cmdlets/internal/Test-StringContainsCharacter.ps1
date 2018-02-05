@@ -4,11 +4,11 @@ function Test-StringContainsCharacter
 {
     <#
     .SYNOPSIS
-    Short description
+    Test whether string contents are in another string
     
     .DESCRIPTION
-    Long description
-    
+    Test whether string contents are in another string
+
     .PARAMETER TestString
     String to examine
     
@@ -28,6 +28,7 @@ function Test-StringContainsCharacter
         $TestString,
         [Parameter(Mandatory)]
         [String]
+        [ValidateNotNullOrEmpty()]
         $ComparisonString
     )
 

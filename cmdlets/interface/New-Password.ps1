@@ -1,5 +1,5 @@
 Set-StrictMode -Version latest
-function Invoke-NewPassword 
+function New-Password 
 {
     <#
     .SYNOPSIS
@@ -24,11 +24,11 @@ function Invoke-NewPassword
     Use of punctuation or special characters in the password
 
     .EXAMPLE
-    Invoke-NewPassword -Length 25 -IncludeLowerCaseLetters -IncludeUpperCaseLetters
+    New-Password -Length 25 -IncludeLowerCaseLetters -IncludeUpperCaseLetters
     Create a 25 character password using Upper and Lower case characters
  
     .EXAMPLE
-    Invoke-NewPassword -Length 10 -IncludeNumbers
+    New-Password -Length 10 -IncludeNumbers
     Create a 10 character password only made of numbers
 
     #>

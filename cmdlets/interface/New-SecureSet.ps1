@@ -1,5 +1,5 @@
 Set-StrictMode -Version latest
-function Invoke-SecureSet
+function New-SecureSet
 {
     <#
     .SYNOPSIS
@@ -18,7 +18,7 @@ function Invoke-SecureSet
     Create host names
     
     .EXAMPLE
-    Invoke-SecureSet -Length 10
+    New-SecureSet -Length 10
     Generate a Server, username and password combination with a maximum of 10 characters
 
     Name                           Value
@@ -28,7 +28,7 @@ function Invoke-SecureSet
     Password                       wcI*UAinLEo
 
     .EXAMPLE
-    Invoke-SecureSet -Length 25 -IncludeInstance -IncludeHostName
+    New-SecureSet -Length 25 -IncludeInstance -IncludeHostName
     Generate a Server, username, password, instance and host combination with a maximum of 15 characters
     Name                           Value
     ----                           -----
@@ -63,11 +63,11 @@ function Invoke-SecureSet
 
     if ($IncludeHostName)
     {
-        $SecureSetData['Host'] = ('{0}' -f (Invoke-NewPassword -includeLowerCaseLetters -includeUpperCaseLetters -includeNumbers -Length:$Length ))
+        $SecureSetData['Host'] = ('{0}' -f (New-Password -includeLowerCaseLetters -includeUpperCaseLetters -includeNumbers -Length:$Length ))
     }
 
-    $SecureSetData['Username'] = ('{0}' -f (Invoke-NewPassword -Length:$Length ))
-    $SecureSetData['Password'] = ('{0}' -f (Invoke-NewPassword -includeLowerCaseLetters -includeUpperCaseLetters -includeNumbers -IncludeSpecial -Length:$Length))
+    $SecureSetData['Username'] = ('{0}' -f (New-Password -Length:$Length ))
+    $SecureSetData['Password'] = ('{0}' -f (New-Password -includeLowerCaseLetters -includeUpperCaseLetters -includeNumbers -IncludeSpecial -Length:$Length))
 
     return $SecureSetData
 }
