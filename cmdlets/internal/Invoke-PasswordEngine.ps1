@@ -44,7 +44,7 @@ function Invoke-PasswordEngine
         $passwordOptions += $numbers
         Write-Verbose ('Length={0}, Lower case enabled, Uppercase enabled, Numbers enabled' -f $length)
     }
-    els
+    else
     {
         if ($includeLowerCaseLetters)
         {
