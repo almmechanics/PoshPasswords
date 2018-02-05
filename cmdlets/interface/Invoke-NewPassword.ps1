@@ -1,6 +1,6 @@
 Set-StrictMode -Version latest
 
-function Invoke-NewPasword
+function Invoke-NewPassword
 {
    Param
    (
