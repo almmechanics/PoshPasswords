@@ -2,20 +2,39 @@ Set-StrictMode -Version latest
 
 function Test-StringContainsCharacter
 {
+    <#
+    .SYNOPSIS
+    Short description
+    
+    .DESCRIPTION
+    Long description
+    
+    .PARAMETER TestString
+    String to examine
+    
+    .PARAMETER ComparisonString
+    String to perform comparison with
+    
+    .EXAMPLE
+    Test-StringContainsCharacter -TestString 'ABCDEF' -ComparisonString 'DE'
+    
+    .NOTES
+    General notes
+    #>
     [CmdletBinding()]
     Param
     (
         [String]
-        $string,
+        $TestString,
         [Parameter(Mandatory)]
         [String]
-        $characterString
+        $ComparisonString
     )
 
     $characterFound = $false
-    for ($i = 0; $i -lt $characterString.Length; $i++)
+    for ($i = 0; $i -lt $ComparisonString.Length; $i++)
     {
-        if ($string.Contains($characterString.SubString($i,1)))
+        if ($TestString.Contains($ComparisonString.SubString($i,1)))
         {
             $characterFound = $true
         }

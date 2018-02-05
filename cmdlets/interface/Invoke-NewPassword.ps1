@@ -1,6 +1,37 @@
 Set-StrictMode -Version latest
 function Invoke-NewPassword 
 {
+    <#
+    .SYNOPSIS
+    Allows the Creation of complex paswords
+
+    .DESCRIPTION
+    Allows the Creation of complex paswords based on various criteria
+    
+    .PARAMETER Length
+    Length of the require password
+    
+    .PARAMETER IncludeLowerCaseLetters
+    Use of Lower case characters in the password
+    
+    .PARAMETER IncludeUpperCaseLetters
+    Use of Upper case characters in the password
+    
+    .PARAMETER IncludeNumbers
+    Use of numeric characters in the password
+    
+    .PARAMETER IncludeSpecial
+    Use of punctuation or special characters in the password
+
+    .EXAMPLE
+    Invoke-NewPassword -Length 25 -IncludeLowerCaseLetters -IncludeUpperCaseLetters
+    Create a 25 character password using Upper and Lower case characters
+ 
+    .EXAMPLE
+    Invoke-NewPassword -Length 10 -IncludeNumbers
+    Create a 10 character password only made of numbers
+
+    #>
    [CmdletBinding()]
    Param
    (    
@@ -15,12 +46,12 @@ function Invoke-NewPassword
         [switch]
         $IncludeNumbers, 
         [switch]
-        $IncludePunctuation
+        $IncludeSpecial
     )
 
     return (Invoke-PasswordEngine -Length:$Length `
              -IncludeLowerCaseLetters:$IncludeLowerCaseLetters `
              -IncludeUpperCaseLetters:$IncludeUpperCaseLetters `
              -IncludeNumbers:$IncludeNumbers `
-             -IncludePunctuation:$IncludePunctuation)
+             -IncludeSpecial:$IncludeSpecial)
 }
