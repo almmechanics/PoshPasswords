@@ -8,16 +8,19 @@ function Invoke-NewPassword
         [int]
         [ValidateRange(5, 255)]
         $Length, 
-        [switch]$IncludeLowerCaseLetters, 
-        [switch]$IncludeUpperCaseLetters, 
-        [switch]$IncludeNumbers, 
-        [switch]$IncludePunctuation
+        [switch]
+        $IncludeLowerCaseLetters, 
+        [switch]
+        $IncludeUpperCaseLetters, 
+        [switch]
+        $IncludeNumbers, 
+        [switch]
+        $IncludePunctuation
     )
 
     return (Invoke-PasswordEngine -Length:$Length `
              -IncludeLowerCaseLetters:$IncludeLowerCaseLetters `
              -IncludeUpperCaseLetters:$IncludeUpperCaseLetters `
              -IncludeNumbers:$IncludeNumbers `
-             -IncludePunctuation:$IncludePunctuation `
-             -Verbose:$Verbose)
+             -IncludePunctuation:$IncludePunctuation)
 }

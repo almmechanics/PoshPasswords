@@ -6,9 +6,12 @@ function Get-RandomCharacter
     (
         [Parameter(Mandatory)]
         [String]
-        $charactersToChooseFrom
+        $CharactersToChooseFrom
     )
 
-    $offSet = Get-Random -Minimum 0 -Maximum (($charactersToChooseFrom.Length) - 1) -SetSeed ((get-date).Ticks % [int32]::MaxValue)
-    return $charactersToChooseFrom.SubString($offSet,1)
+    $offSet = Get-Random -Minimum 0 `
+                -Maximum (($CharactersToChooseFrom.Length) - 1) `
+                -SetSeed ((get-date).Ticks % [int32]::MaxValue)
+
+    return $CharactersToChooseFrom.SubString($offSet,1)
 }

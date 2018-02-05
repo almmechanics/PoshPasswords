@@ -8,10 +8,14 @@ function Invoke-PasswordEngine
         [ValidateRange(5,255)]
         [int]
         $Length,
-            [switch]$IncludeLowerCaseLetters,
-            [switch]$IncludeUpperCaseLetters,
-            [switch]$IncludeNumbers,
-            [switch]$IncludePunctuation
+        [switch]
+        $IncludeLowerCaseLetters,
+        [switch]
+        $IncludeUpperCaseLetters,
+        [switch]
+        $IncludeNumbers,
+        [switch]
+        $IncludePunctuation
     )
 
     $useDefaults = $false
@@ -20,10 +24,7 @@ function Invoke-PasswordEngine
         $includeNumbers.IsPresent -or 
         $includePunctuation.IsPresent))
     {
-        if ($verbose.IsPresent)
-        {
-            Write-Warning ('No options set ... creating defaults')
-        }
+        Write-Warning ('No options set ... creating defaults')
         $useDefaults = $true
     }
 
@@ -41,10 +42,7 @@ function Invoke-PasswordEngine
         $passwordOptions += $lowerCaseLetters
         $passwordOptions += $upperCaseLetters
         $passwordOptions += $numbers
-        if ($verbose.IsPresent)
-        {
-            Write-Warning ('Length={0}, Lower case enabled, Uppercase enabled, Numbers enabled' -f $length)
-        }
+        Write-Verbose ('Length={0}, Lower case enabled, Uppercase enabled, Numbers enabled' -f $length)
     }
     else
     {
