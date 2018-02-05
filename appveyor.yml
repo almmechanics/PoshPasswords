@@ -1,5 +1,9 @@
-# See http://www.appveyor.com/docs/appveyor-yml for many more options
+version: 1.0.{build}
+install:
 
+  - cinst pester -y
+
+build: false
 
 test_script:
     - ps: |
