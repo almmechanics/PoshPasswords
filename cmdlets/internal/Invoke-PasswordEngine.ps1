@@ -42,7 +42,7 @@ function Invoke-PasswordEngine
         $passwordOptions += $lowerCaseLetters
         $passwordOptions += $upperCaseLetters
         $passwordOptions += $numbers
-        Write-Verbose ('Length={0}, Lower case enabled, Uppercase enabled, Numbers enabled' -f $length)
+        Write-Verbose ('Length={0}, Lower case enabled, Uppercase enabled, Numbers enabled' -f $Length)
     }
     else
     {
@@ -75,13 +75,13 @@ function Invoke-PasswordEngine
     
     $passwordIsValid = $false
     $iterationCount = 0
+    $password = [string]::Empty
     while((-not $passwordIsValid) -and ($iterationCount -lt $maximumIterations))
     {
        $passwordIsValid = $true
-       $password = [string]::Empty
-
+ 
        $iterationCount++
-       for ($i = 1; $i -le $length; $i++)
+       for ($i = 1; $i -le $Length; $i++)
        {
            $password += Get-RandomCharacter $passwordOptions
        }
