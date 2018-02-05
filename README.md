@@ -1,10 +1,6 @@
 # PoshPasswords
 Password helper for working with Azure
 
-## Build Status
-
-[![Build status](https://ci.appveyor.com/api/projects/status/8tlrgfy9fbdji20e/branch/master?svg=true)](https://ci.appveyor.com/project/almmechanics/poshpasswords/branch/master)
-
 ## Usage
 
 ### New-Password
@@ -44,3 +40,5 @@ This generates a set of values as follows:
 |Username|pdfMeieZr8AeUMZtmIOl4NJRcs|
 |Password|X7N@q29dLWre6qsmnwNZkfPTXO|
     
+## Build Status
+[![AppVeyor status](https://ci.appveyor.com/api/projects/status/8tlrgfy9fbdji20e/branch/master?svg=true)](https://ci.appveyor.com/project/almmechanics/poshpasswords/branch/master) [![VSTS status](https://almmechanics.visualstudio.com/_apis/public/build/definitions/0a813601-24f8-412a-8e8a-15aad4c0d629/15/badge)]
