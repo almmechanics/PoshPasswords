@@ -1,6 +1,42 @@
 Set-StrictMode -Version latest
 function Invoke-PasswordEngine
 {
+    <#
+    .SYNOPSIS
+    Engine to create complex paswords
+    
+    .DESCRIPTION
+    Engine to create complex paswords
+    
+   .SYNOPSIS
+    Engine to create complex paswords
+
+    .DESCRIPTION
+    Allows the Creation of complex paswords based on various criteria
+    
+    .PARAMETER Length
+    Length of the require password
+    
+    .PARAMETER IncludeLowerCaseLetters
+    Use of Lower case characters in the password
+    
+    .PARAMETER IncludeUpperCaseLetters
+    Use of Upper case characters in the password
+    
+    .PARAMETER IncludeNumbers
+    Use of numeric characters in the password
+    
+    .PARAMETER IncludeSpecial
+    Use of punctuation or special characters in the password    
+
+    .EXAMPLE
+    Invoke-PasswordEngine -Length 10 -IncludeNumbers -IncludeSpecial
+    Generate a password of 10 characters which uses only numbers and special characters
+
+    .EXAMPLE
+    Invoke-PasswordEngine -Length 10 -IncludeNumbers -Verbose
+    Generate a password of 10 characters which uses only numbers, but display the characters used
+    #>
    [CmdletBinding()]
    Param
    (
@@ -15,19 +51,13 @@ function Invoke-PasswordEngine
         [switch]
         $IncludeNumbers,
         [switch]
-        $IncludePunctuation
+        $IncludeSpecial
     )
 
-    $useDefaults = $false
-    if (!($includeLowerCaseLetters.IsPresent -or 
-        $includeUpperCaseLetters.IsPresent -or
-        $includeNumbers.IsPresent -or 
-        $includePunctuation.IsPresent))
-    {
-        Write-Warning ('No options set ... creating defaults')
-        $useDefaults = $true
-    }
-
+    $useDefaults =  (!($IncludeLowerCaseLetters.IsPresent -or `
+                        $IncludeUpperCaseLetters.IsPresent -or `
+                        $IncludeNumbers.IsPresent))
+ 
     [bool]$passwordIsValid = $false
     [string]$lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz"
     [string]$upperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -39,10 +69,10 @@ function Invoke-PasswordEngine
 
     if ($useDefaults)
     {        
+        Write-Verbose ('Using defaults with Length={0}, Lower case enabled, Uppercase enabled, Numbers enabled' -f $Length)
         $passwordOptions += $lowerCaseLetters
         $passwordOptions += $upperCaseLetters
         $passwordOptions += $numbers
-        Write-Verbose ('Length={0}, Lower case enabled, Uppercase enabled, Numbers enabled' -f $Length)
     }
     else
     {
@@ -58,7 +88,7 @@ function Invoke-PasswordEngine
         {
             $passwordOptions += $numbers
         }
-        if ($includePunctuation)
+        if ($IncludeSpecial)
         {
             $passwordOptions += $punctuation
         }
@@ -71,7 +101,7 @@ function Invoke-PasswordEngine
     # Checking to see if the length of password requested is shorter than that needed
     # to fit 1 example of each set.  This should not be be necessary as the attribute
     # of the length parameter restricts the value to a minimum of 5.
-    Write-Verbose $passwordOptions
+    Write-Verbose ('Using the following characters for seeding the password: "{0}"' -f $passwordOptions)
     
     $passwordIsValid = $false
     $iterationCount = 0
@@ -82,23 +112,23 @@ function Invoke-PasswordEngine
  
        while ([string]::IsNullOrEmpty($password) -or ($password.Length -le $Length))
        {
-            $password += Get-RandomCharacter $passwordOptions
+            $password += Get-RandomCharacter -InputString $passwordOptions
        
             if ($passwordIsValid -and $includeLowerCaseLetters)
             {
-                $passwordIsValid = Test-StringContainsCharacter $password $lowerCaseLetters
+                $passwordIsValid = Test-StringContainsCharacter -TestString $password -ComparisonString $lowerCaseLetters
             }
             if ($passwordIsValid -and $includeUpperCaseLetters)
             {
-                $passwordIsValid = Test-StringContainsCharacter $password $upperCaseLetters
+                $passwordIsValid = Test-StringContainsCharacter -TestString $password -ComparisonString $upperCaseLetters
             }
             if ($passwordIsValid -and $includeNumbers)
             {
-                $passwordIsValid = Test-StringContainsCharacter $password $numbers
+                $passwordIsValid = Test-StringContainsCharacter -TestString $password -ComparisonString $numbers
             }
-            if ($passwordIsValid -and $includePunctuation)
+            if ($passwordIsValid -and $IncludeSpecial)
             {
-                $passwordIsValid = Test-StringContainsCharacter $password $punctuation
+                $passwordIsValid = Test-StringContainsCharacter -TestString $password -ComparisonString $punctuation
             } 
         }
     }   
@@ -107,23 +137,23 @@ function Invoke-PasswordEngine
     {
        if ($includeLowerCaseLetters)
        {
-           $password += Get-RandomCharacter $lowerCaseLetters
+           $password += Get-RandomCharacter -InputString $lowerCaseLetters
        }
        if ($includeUpperCaseLetters)
        {
-           $password += Get-RandomCharacter $upperCaseLetters
+           $password += Get-RandomCharacter -InputString $upperCaseLetters
        }
        if ($includeNumbers)
        {
-           $password += Get-RandomCharacter $numbers
+           $password += Get-RandomCharacter -InputString $numbers
        }
-       if ($includePunctuation)
+       if ($IncludeSpecial)
        {
-           $password += Get-RandomCharacter $Punctuation
+           $password += Get-RandomCharacter -InputString $Punctuation
        }
        for ($i = $password.Length + 1; $i -le $length; $i++)
        {
-           $password += Get-RandomCharacter $passwordOptions
+           $password += Get-RandomCharacter -InputString $passwordOptions
        }
     }
     return $password
