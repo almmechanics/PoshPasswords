@@ -44,7 +44,7 @@ function Invoke-PasswordEngine
         $passwordOptions += $numbers
         Write-Verbose ('Length={0}, Lower case enabled, Uppercase enabled, Numbers enabled' -f $length)
     }
-    else
+    els
     {
         if ($includeLowerCaseLetters)
         {
@@ -71,11 +71,8 @@ function Invoke-PasswordEngine
     # Checking to see if the length of password requested is shorter than that needed
     # to fit 1 example of each set.  This should not be be necessary as the attribute
     # of the length parameter restricts the value to a minimum of 5.
-    if ($verbose) 
-    {
-       Write-Verbose $passwordOptions
-    }
-
+    Write-Verbose $passwordOptions
+    
     $passwordIsValid = $false
     $iterationCount = 0
     while((-not $passwordIsValid) -and ($iterationCount -lt $maximumIterations))
