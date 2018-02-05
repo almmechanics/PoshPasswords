@@ -1,5 +1,18 @@
-function Test-StringContainsCharacter([string]$string,[string]$characterString)
+Set-StrictMode -Version latest
+
+function Test-StringContainsCharacter
 {
+    [CmdletBinding()]
+    Param
+    (
+        [Parameter(Mandatory)]
+        [String]
+        $string,
+        [Parameter(Mandatory)]
+        [String]
+        $characterString
+    )
+
     $characterFound = $false
     for ($i = 0; $i -lt $characterString.Length; $i++)
     {

@@ -1,9 +1,13 @@
+Set-StrictMode -Version latest
 function Invoke-RandomServerName
 {
-    param
+    [CmdletBinding()]
+    Param
     (
-      [ValidateRange(5,30)]
-      [int]$length = 15
+        [Parameter(Mandatory)]
+        [ValidateRange(5,255)]
+        [int]
+        $Length
     )
 
     if (([GUID]::NewGuid()).ToString() -match '^\w{8}-\w{4}-\w{4}-\w{4}')   

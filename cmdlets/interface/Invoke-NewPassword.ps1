@@ -1,23 +1,23 @@
 Set-StrictMode -Version latest
-
-function Invoke-NewPassword
+function Invoke-NewPassword 
 {
+   [CmdletBinding()]
    Param
-   (
-       [ValidateRange(5,30)]
-       [int]$length = 15,
-       [switch]$includeLowerCaseLetters,
-       [switch]$includeUpperCaseLetters,
-       [switch]$includeNumbers,
-       [switch]$includePunctuation,
-       [switch]$verbose
+   (    
+        [Parameter(Mandatory)]
+        [int]
+        [ValidateRange(5, 255)]
+        $Length, 
+        [switch]$IncludeLowerCaseLetters, 
+        [switch]$IncludeUpperCaseLetters, 
+        [switch]$IncludeNumbers, 
+        [switch]$IncludePunctuation
     )
 
-    return (Invoke-PasswordEngine -Length:$length `
-        -includeLowerCaseLetters:$includeLowerCaseLetters `
-        -includeUpperCaseLetters:$includeUpperCaseLetters `
-        -includeNumbers:$includeNumbers `
-        -includePunctuation:$includePunctuation `
-        -verbose:$verbose
-        )
-    }
+    return (Invoke-PasswordEngine -Length:$Length `
+             -IncludeLowerCaseLetters:$IncludeLowerCaseLetters `
+             -IncludeUpperCaseLetters:$IncludeUpperCaseLetters `
+             -IncludeNumbers:$IncludeNumbers `
+             -IncludePunctuation:$IncludePunctuation `
+             -Verbose:$Verbose)
+}
