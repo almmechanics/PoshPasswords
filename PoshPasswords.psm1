@@ -1,4 +1,5 @@
 Set-StrictMode -Version Latest
+
 $cmdletsPath = Join-Path $PSScriptRoot 'cmdlets'
 
 $interfacePath = Join-Path $cmdletsPath 'interface'
