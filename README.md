@@ -1,5 +1,5 @@
 # PoshPasswords
-Password helper for working with Azure
+Password helper for working with Azure. [Source material in git hub](https://github.com/almmechanics/PoshPasswords)
 
 ## Usage
 
