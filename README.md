@@ -41,4 +41,4 @@ This generates a set of values as follows:
 |Password|X7N@q29dLWre6qsmnwNZkfPTXO|
     
 ## Build Status
-[![AppVeyor status](https://ci.appveyor.com/api/projects/status/8tlrgfy9fbdji20e/branch/master?svg=true)](https://ci.appveyor.com/project/almmechanics/poshpasswords/branch/master) [![VSTS status](https://almmechanics.visualstudio.com/_apis/public/build/definitions/0a813601-24f8-412a-8e8a-15aad4c0d629/15/badge)]
+[![AppVeyor status](https://ci.appveyor.com/api/projects/status/8tlrgfy9fbdji20e/branch/master?svg=true)](https://ci.appveyor.com/project/almmechanics/poshpasswords/branch/master) ![VSTS status](https://almmechanics.visualstudio.com/_apis/public/build/definitions/0a813601-24f8-412a-8e8a-15aad4c0d629/15/badge)
