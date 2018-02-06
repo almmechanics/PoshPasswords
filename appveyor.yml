@@ -1,7 +1,7 @@
 version: 1.0.{build}
 install:
-
   - cinst pester -y
+  - cinst codecov -y
 
 build: false
 
@@ -14,3 +14,4 @@ test_script:
         if ($res.FailedCount -gt 0) { 
             throw "$($res.FailedCount) tests failed."
         }
+- codecov -f $testResultsFile
